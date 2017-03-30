@@ -1,0 +1,52 @@
+﻿<Window x:Class="ReadExcel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sue小助手" Height="566" Width="797">
+    <DockPanel LastChildFill="True">
+        <Menu HorizontalAlignment="Stretch" Name="menu1" DockPanel.Dock="Top">
+            <MenuItem Header="基本信息">
+                <MenuItem Header="员工表" Click="EmployeeMenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="薪资信息">
+                <MenuItem Name="SalaryTable" Header="薪资表" Click="OtherTableMenuItem_Click"/>
+                <MenuItem Name="SaleTable" Header="销售表" Click="OtherTableMenuItem_Click"/>
+                <MenuItem Name="TimeTable" Header="考勤表" Click="OtherTableMenuItem_Click"/>
+                <MenuItem Name="InsuranceTable" Header="社保表" Click="OtherTableMenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="控制">
+                <MenuItem Header="统计信息" Click="SummaryDataMenuItem_Click"/>
+                <MenuItem Header="工资明细表" Click="GenerateSalaryDetailMenuItem_Click"/>
+                <MenuItem Header="发放汇总表" Click="GenerateCompanySummaryMenuItem_Click"/>
+                <MenuItem Header="清除日志" Click="ClearLogMenuItem_Click"/>
+                <MenuItem Header="清空数据" Click="ClearDataMenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="帮助">
+                <MenuItem Header="关于" Click="AboutMenuItem_Click"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel DockPanel.Dock="Top">
+            <Border>
+                <DockPanel LastChildFill="false">
+                    <ComboBox VerticalAlignment="Center" Margin="5" Name="monthComboBox" MinWidth="65" SelectionChanged="monthComboBox_SelectionChanged" DockPanel.Dock="Right" />
+                    <ComboBox VerticalAlignment="Center" Margin="5" Name="yearComboBox" MinWidth="65" SelectionChanged="yearComboBox_SelectionChanged" DockPanel.Dock="Right" />
+                    <TextBlock VerticalAlignment="Center" Margin="5" Name="textBlock3" Text="薪资时间:" Width="58" DockPanel.Dock="Right" />
+                </DockPanel>
+            </Border>
+            <Border>
+                <DockPanel LastChildFill="false">
+                    <RadioButton Content="平均21.75日/月" VerticalAlignment="Center" MinWidth="110" Name="averageMonthBtn" GroupName="useAverageMonthBtn" DockPanel.Dock="Right" IsChecked="{Binding Path=UseAverageMonthDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="UseAverageRadioButton_Checked" Unchecked="UseAverageRadioButton_Unchecked" />
+                    <ComboBox Margin="5" Name="lastWorkDayComboBox" VerticalAlignment="Center" MinWidth="65" DockPanel.Dock="Right" />
+                    <TextBlock Margin="5" Name="lastMonthTextBox" Text="上月工作日:" VerticalAlignment="Center" MinWidth="110" DockPanel.Dock="Right" />
+                </DockPanel>
+            </Border>
+            <Border>
+                <DockPanel LastChildFill="false">
+                    <RadioButton Content="实际工作日/月" VerticalAlignment="Center" MinWidth="110" GroupName="useAverageMonthBtn" DockPanel.Dock="Right"/>
+                    <ComboBox Margin="5" Name="thisWorkDayComboBox" VerticalAlignment="Top" MinWidth="65" DockPanel.Dock="Right" />
+                    <TextBlock Margin="5" Name="thisMonthTextBox" Text="当月工作日:" VerticalAlignment="Center" MinWidth="110" DockPanel.Dock="Right" />
+                </DockPanel>
+            </Border>
+        </StackPanel>
+        <RichTextBox Margin="5" Name="logBox"  VerticalScrollBarVisibility="Auto" IsReadOnly="True" DockPanel.Dock="Bottom"/>
+    </DockPanel>
+</Window>
