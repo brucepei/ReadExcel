@@ -501,7 +501,13 @@ namespace ReadExcel
             Decimal result = 0.0m;
             if (birthday.Month == em.SalaryThisDate.Month)
             {
-                if (empOrigDate.AddMonths(6).Year >= em.SalaryThisDate.Year)
+                var empFormalDate = empOrigDate.AddMonths(6);
+                var empFormalDateThanHalfYear = empOrigDate.AddYears(1);
+                if (empFormalDate > em.SalaryThisDateLastDay)
+                {
+                    result = 0.0m;
+                }
+                else if (empFormalDateThanHalfYear > em.SalaryThisDateLastDay)
                 {
                     result = birthAllowance / 2;
                 }
